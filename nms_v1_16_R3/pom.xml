@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.kovalski</groupId>
+        <artifactId>corpsemaster</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>nms_v1_16_R3</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kovalski</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <scope>provided</scope>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>

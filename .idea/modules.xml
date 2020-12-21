@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/corpsemaster.iml" filepath="$PROJECT_DIR$/corpsemaster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nms_v1_15_R1/nms_v1_15_R1.iml" filepath="$PROJECT_DIR$/nms_v1_15_R1/nms_v1_15_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nms_v1_16_R1/nms_v1_16_R1.iml" filepath="$PROJECT_DIR$/nms_v1_16_R1/nms_v1_16_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nms_v1_16_R2/nms_v1_16_R2.iml" filepath="$PROJECT_DIR$/nms_v1_16_R2/nms_v1_16_R2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nms_v1_16_R3/nms_v1_16_R3.iml" filepath="$PROJECT_DIR$/nms_v1_16_R3/nms_v1_16_R3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
+    </modules>
+  </component>
+</project>

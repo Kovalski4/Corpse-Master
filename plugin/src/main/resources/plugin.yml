@@ -1,0 +1,9 @@
+name: Corpsemaster
+version: ${project.version}
+main: org.kovalski.corpsemaster.Main
+api-version: 1.13
+authors: [Kovalski]
+description: Corpses in latest versions
+commands:
+  corpsemaster:
+    description: Reload Command

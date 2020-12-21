@@ -1,0 +1,8 @@
+#Please don't touch
+config-version: 1.1
+
+#Time in seconds until the corpse despawns
+corpse-time: 30
+
+#Show equipment on the corpse
+show-armor: true
