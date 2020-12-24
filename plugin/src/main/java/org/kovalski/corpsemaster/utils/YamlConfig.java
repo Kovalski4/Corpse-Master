@@ -11,8 +11,8 @@ import java.io.*;
 
 public class YamlConfig extends YamlConfiguration {
 
-    private Main instance = Main.getInstance();
-    private String fileName;
+    private final Main instance = Main.getInstance();
+    private final String fileName;
 
     public YamlConfig(File file, String fileName){
         this.fileName = fileName;
@@ -35,7 +35,7 @@ public class YamlConfig extends YamlConfiguration {
             }
         }
 
-        if (this.getDouble("config-version") < 1.1){
+        if (this.getDouble("config-version") < 1.2){
             if (file.delete()) {
                 saveDefaultConfig(file);
                 this.load(file);

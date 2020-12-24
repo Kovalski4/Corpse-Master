@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.kovalski.corpsemaster.CorpseApi;
 import org.kovalski.corpsemaster.CorpseHolder;
 import org.kovalski.corpsemaster.ICorpse;
 import org.kovalski.corpsemaster.Main;
@@ -22,7 +21,6 @@ import java.util.List;
 public class PlayerListener extends CorpseHolder implements Listener {
 
     private final Main instance = Main.getInstance();
-    private final CorpseApi corpseApi = instance.getCorpseApi();
 
     @EventHandler
     public void chunkLoad(ChunkLoadEvent e){

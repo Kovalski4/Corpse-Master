@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.kovalski.corpsemaster.cmds.CorpseMasterCommand;
 import org.kovalski.corpsemaster.listeners.PlayerListener;
+import org.kovalski.corpsemaster.utils.MessageUtil;
 import org.kovalski.corpsemaster.utils.UpdateChecker;
 import org.kovalski.corpsemaster.utils.YamlConfig;
 
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 public final class Main extends JavaPlugin {
 
     private static Main instance;
+    private MessageUtil messageUtil;
     private YamlConfig yamlConfig;
     private CorpseApi corpseApi;
 
@@ -43,10 +45,12 @@ public final class Main extends JavaPlugin {
     @SuppressWarnings("ConstantConditions")
     private void loadCommands(){
         getCommand("corpsemaster").setExecutor(new CorpseMasterCommand());
+        getCommand("corpsemaster").setTabCompleter(new CorpseMasterCommand());
     }
 
     private void loadConfig(){
         yamlConfig = new YamlConfig(new File(this.getDataFolder(), "config.yml"), "config.yml");
+        messageUtil = new MessageUtil();
     }
 
     private void loadListeners(){
@@ -74,6 +78,11 @@ public final class Main extends JavaPlugin {
                 logger.info("You are running latest version of CorpseMaster (v"+currentVer+")");
             }
         });
+    }
+
+    public void reloadConfig(){
+        getYamlConfig().reload();
+        getMessageUtil().reload();
     }
 
     public static Main getInstance() {
@@ -122,5 +131,9 @@ public final class Main extends JavaPlugin {
 
     public CorpseApi getCorpseApi() {
         return corpseApi;
+    }
+
+    public MessageUtil getMessageUtil() {
+        return messageUtil;
     }
 }

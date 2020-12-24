@@ -1,8 +1,20 @@
-#Please don't touch
-config-version: 1.1
+#
+# Corpse-Master Corpses in latest versions!
+# https://github.com/Kovalskki/Corpse-Master
+# Give feedback for bugs and suggestions
+#
+# Please don't touch
+config-version: 1.2
 
-#Time in seconds until the corpse despawns
+# Plugin Prefix for messages. Usage %prefix%
+prefix: "&cCorpse-Master&8>&7"
+
+# Time in seconds until the corpse despawns
 corpse-time: 30
 
-#Show equipment on the corpse
+# Show equipment on the corpse
 show-armor: true
+
+# Plugin Messages
+messages:
+  reload: "%prefix% Configuration Reloaded"
