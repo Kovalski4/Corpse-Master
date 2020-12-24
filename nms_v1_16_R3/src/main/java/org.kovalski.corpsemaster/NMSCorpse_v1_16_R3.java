@@ -13,10 +13,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class NMSCorpse_v1_16_R3 implements ICorpse {
+
+    private List<Pair<EnumItemSlot, ItemStack>> armorContents = new ArrayList<>();
+    private org.bukkit.Chunk chunk;
+    private boolean hookEquipment;
+    private Inventory inventory;
+    private Location bedLoc;
 
     private MinecraftServer nmsServer;
     private WorldServer nmsWorld;
@@ -32,10 +40,6 @@ public class NMSCorpse_v1_16_R3 implements ICorpse {
     private PacketPlayOutEntityMetadata packetPlayOutEntityMetadata;
     private PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook movePacket;
     private PacketPlayOutEntityEquipment entityEquipment;
-    private Inventory inventory;
-    private org.bukkit.Chunk chunk;
-    private Location bedLoc;
-    private Boolean hookEquipment;
 
     public NMSCorpse_v1_16_R3(Location location, Player player, boolean hookEquipment){
         this.nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
@@ -43,9 +47,12 @@ public class NMSCorpse_v1_16_R3 implements ICorpse {
         this.gameProfile = getGameProfile(player);
         this.bedLoc = player.getLocation().clone().toVector().setY(0.0D).toLocation(player.getWorld());
         this.fakeBedPacket = new PacketPlayOutBlockChange(fakeBed(getDirection(location.clone().getYaw())), toBlockPosition(bedLoc));
-        this.hookEquipment = hookEquipment;
         this.owner = player;
-        this.inventory = player.getInventory();
+        if (hookEquipment) {
+            setArmorContents();
+            this.inventory = player.getInventory();
+            this.hookEquipment = true;
+        }
     }
 
     @Override
@@ -65,9 +72,22 @@ public class NMSCorpse_v1_16_R3 implements ICorpse {
     }
 
     @Override
-    public void removeCorpse() {
-        for (Player p : Bukkit.getOnlinePlayers()){
-            removeCorpsePacket(p);
+    public void sendCorpsePacket(Player player) {
+        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+        connection.sendPacket(playerInfoAdd);
+        connection.sendPacket(namedEntitySpawn);
+        connection.sendPacket(headRotation);
+        connection.sendPacket(packetPlayOutEntityMetadata);
+        connection.sendPacket(fakeBedPacket);
+        connection.sendPacket(movePacket);
+        if (hookEquipment) sendEquipmentPacket(player);
+    }
+
+    public void sendEquipmentPacket(Player player) {
+        PlayerConnection playerConnection = ((CraftPlayer) player).getHandle().playerConnection;
+        for (Pair<EnumItemSlot, ItemStack> pair : armorContents){
+            entityEquipment = new PacketPlayOutEntityEquipment(corpse.getId(), Collections.singletonList(pair));
+            playerConnection.sendPacket(entityEquipment);
         }
     }
 
@@ -83,11 +103,6 @@ public class NMSCorpse_v1_16_R3 implements ICorpse {
     }
 
     @Override
-    public org.bukkit.Chunk getChunk() {
-        return this.chunk;
-    }
-
-    @Override
     public void updateCorpseEveryone() {
         for (Player player : Bukkit.getOnlinePlayers()){
             updateCorpse(player);
@@ -95,56 +110,35 @@ public class NMSCorpse_v1_16_R3 implements ICorpse {
     }
 
     @Override
-    public void sendCorpsePacket(Player player) {
-        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-        connection.sendPacket(playerInfoAdd);
-        connection.sendPacket(namedEntitySpawn);
-        connection.sendPacket(headRotation);
-        connection.sendPacket(packetPlayOutEntityMetadata);
-        connection.sendPacket(fakeBedPacket);
-        connection.sendPacket(movePacket);
-        if (hookEquipment) sendEquipmentPacket(player);
-    }
-
-    @Override
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    @Override
-    public Location getBedLocation() {
-        return bedLoc;
-    }
-
-    public void sendEquipmentPacket(Player player) {
-        PlayerConnection playerConnection = ((CraftPlayer) player).getHandle().playerConnection;
-
-        net.minecraft.server.v1_16_R3.ItemStack helmet = CraftItemStack.asNMSCopy(owner.getInventory().getHelmet());
-        net.minecraft.server.v1_16_R3.ItemStack chestplate = CraftItemStack.asNMSCopy(owner.getInventory().getChestplate());
-        net.minecraft.server.v1_16_R3.ItemStack leggings = CraftItemStack.asNMSCopy(owner.getInventory().getLeggings());
-        net.minecraft.server.v1_16_R3.ItemStack boots = CraftItemStack.asNMSCopy(owner.getInventory().getBoots());
-
-        Pair<EnumItemSlot, net.minecraft.server.v1_16_R3.ItemStack> pair = new Pair<>(EnumItemSlot.HEAD, helmet);
-        Pair<EnumItemSlot, ItemStack> pair2 = new Pair<>(EnumItemSlot.CHEST, chestplate);
-        Pair<EnumItemSlot, net.minecraft.server.v1_16_R3.ItemStack> pair3 = new Pair<>(EnumItemSlot.LEGS, leggings);
-        Pair<EnumItemSlot, net.minecraft.server.v1_16_R3.ItemStack> pair4 = new Pair<>(EnumItemSlot.FEET, boots);
-
-        entityEquipment = new PacketPlayOutEntityEquipment(corpse.getId(), Collections.singletonList(pair));
-        playerConnection.sendPacket(entityEquipment);
-
-        entityEquipment = new PacketPlayOutEntityEquipment(corpse.getId(), Collections.singletonList(pair2));
-        playerConnection.sendPacket(entityEquipment);
-
-        entityEquipment = new PacketPlayOutEntityEquipment(corpse.getId(), Collections.singletonList(pair3));
-        playerConnection.sendPacket(entityEquipment);
-
-        entityEquipment = new PacketPlayOutEntityEquipment(corpse.getId(), Collections.singletonList(pair4));
-        playerConnection.sendPacket(entityEquipment);
+    public void removeCorpse() {
+        for (Player p : Bukkit.getOnlinePlayers()){
+            removeCorpsePacket(p);
+        }
     }
 
     public void removeCorpsePacket(Player player) {
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
         connection.sendPacket(destroy);
+    }
+
+    @Override
+    public org.bukkit.Chunk getChunk() {
+        return this.chunk;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+
+    public GameProfile getGameProfile(Player player) {
+        EntityPlayer p = ((CraftPlayer) player).getHandle();
+        return p.getProfile();
+    }
+
+    @Override
+    public Location getBedLocation() {
+        return bedLoc;
     }
 
     private void setMetadata(){
@@ -153,9 +147,21 @@ public class NMSCorpse_v1_16_R3 implements ICorpse {
         setBedPosition();
     }
 
-    public GameProfile getGameProfile(Player player) {
-        EntityPlayer p = ((CraftPlayer) player).getHandle();
-        return p.getProfile();
+    private void setArmorContents(){
+        ItemStack helmet = CraftItemStack.asNMSCopy(owner.getInventory().getHelmet());
+        ItemStack chestplate = CraftItemStack.asNMSCopy(owner.getInventory().getChestplate());
+        ItemStack leggings = CraftItemStack.asNMSCopy(owner.getInventory().getLeggings());
+        ItemStack boots = CraftItemStack.asNMSCopy(owner.getInventory().getBoots());
+
+        Pair<EnumItemSlot, ItemStack> pair = new Pair<>(EnumItemSlot.HEAD, helmet);
+        Pair<EnumItemSlot, ItemStack> pair2 = new Pair<>(EnumItemSlot.CHEST, chestplate);
+        Pair<EnumItemSlot, ItemStack> pair3 = new Pair<>(EnumItemSlot.LEGS, leggings);
+        Pair<EnumItemSlot, ItemStack> pair4 = new Pair<>(EnumItemSlot.FEET, boots);
+
+        armorContents.add(pair);
+        armorContents.add(pair2);
+        armorContents.add(pair3);
+        armorContents.add(pair4);
     }
 
     static IBlockAccess fakeBed(EnumDirection direction){

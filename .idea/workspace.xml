@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1526475-cffa-4077-9b54-76dff60bb683" name="Default Changelist" comment="Initial commit">
+    <list default="true" id="b1526475-cffa-4077-9b54-76dff60bb683" name="Default Changelist" comment="pom.xml version update">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_nodep_3_2_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_comphenix_executors_BukkitExecutors_1_1_SNAPSHOT.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_comphenix_protocol_ProtocolLib_4_5_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_16_4_R0_1_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_16_4_R0_1_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms_v1_15_R1/src/main/java/org/kovalski/corpsemaster/NMSCorpse_v1_15_R1.java" beforeDir="false" afterPath="$PROJECT_DIR$/nms_v1_15_R1/src/main/java/org/kovalski/corpsemaster/NMSCorpse_v1_15_R1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms_v1_16_R1/src/main/java/org/kovalski/corpsemaster/NMSCorpse_v1_16_R1.java" beforeDir="false" afterPath="$PROJECT_DIR$/nms_v1_16_R1/src/main/java/org/kovalski/corpsemaster/NMSCorpse_v1_16_R1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms_v1_16_R2/src/main/java/org/kovalski/corpsemaster/NMSCorpse_v1_16_R2.java" beforeDir="false" afterPath="$PROJECT_DIR$/nms_v1_16_R2/src/main/java/org/kovalski/corpsemaster/NMSCorpse_v1_16_R2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms_v1_16_R3/src/main/java/org.kovalski.corpsemaster/NMSCorpse_v1_16_R3.java" beforeDir="false" afterPath="$PROJECT_DIR$/nms_v1_16_R3/src/main/java/org.kovalski.corpsemaster/NMSCorpse_v1_16_R3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/plugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/plugin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,6 +410,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -606,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608588825432</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="pom.xml version update">
+      <created>1608589619788</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1608589619788</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -689,7 +709,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Revert &quot;Initial commit&quot;&#10;&#10;This reverts commit e4013b3a" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="pom.xml version update" />
+    <option name="LAST_COMMIT_MESSAGE" value="pom.xml version update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
