@@ -97,7 +97,7 @@ public class NMSCorpse_v1_15_R1 implements ICorpse {
             public void run() {
                 sendCorpsePacket(player);
             }
-        }.runTaskLater(new CorpseApi().getInstance(), 10L);
+        }.runTaskLater(new CorpseApi().getInstance(), 20L);
     }
 
     @Override
