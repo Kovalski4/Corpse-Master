@@ -4,7 +4,7 @@
 # Give feedback for bugs and suggestions
 #
 # Please don't touch
-config-version: 1.2
+config-version: 1.3
 
 # Plugin Prefix for messages. Usage %prefix%
 prefix: "&cCorpse-Master&8>&7"
@@ -18,3 +18,4 @@ show-armor: true
 # Plugin Messages
 messages:
   reload: "%prefix% Configuration Reloaded"
+  error_no_permission: "%prefix% You don't have permission for use this command!"

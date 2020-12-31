@@ -35,7 +35,7 @@ public class YamlConfig extends YamlConfiguration {
             }
         }
 
-        if (this.getDouble("config-version") < 1.2){
+        if (this.getDouble("config-version") < 1.3){
             if (file.delete()) {
                 saveDefaultConfig(file);
                 this.load(file);

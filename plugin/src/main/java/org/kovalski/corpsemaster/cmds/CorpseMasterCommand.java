@@ -18,7 +18,12 @@ public class CorpseMasterCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender.hasPermission("corpsemaster.admin")){
+        if (!sender.hasPermission("corpsemaster.admin")){
+            sender.sendMessage(messageUtil.getMessage(MessageUtil.Messages.ERROR_NO_PERMISSION));
+            return true;
+        }
+
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")){
             instance.reloadConfig();
             sender.sendMessage(messageUtil.getMessage(MessageUtil.Messages.MSG_RELOAD));
             return true;

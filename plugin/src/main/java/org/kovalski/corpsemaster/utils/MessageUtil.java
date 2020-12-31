@@ -12,7 +12,8 @@ public class MessageUtil {
     public enum Messages{
         CONFIG_VERSION,
         PREFIX,
-        MSG_RELOAD
+        MSG_RELOAD,
+        ERROR_NO_PERMISSION
 
     }
 
@@ -30,6 +31,8 @@ public class MessageUtil {
             case MSG_RELOAD:
                 message = messages.getString("reload");
                 break;
+            case ERROR_NO_PERMISSION:
+                message = messages.getString("error_no_permission");
         }
 
         return message.replaceAll("%prefix%", getPrefix())
