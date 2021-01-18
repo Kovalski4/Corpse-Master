@@ -23,7 +23,9 @@ public class CorpseUtil {
 
             if (y < 0) {
                 break;
-            } else if (block.getType() == org.bukkit.Material.WATER) {
+            }
+
+            else if (block.getType() == org.bukkit.Material.WATER) {
 
                 if (block.getRelative(BlockFace.UP).getType() == org.bukkit.Material.AIR) {
                     y -= 0.1;
@@ -32,22 +34,32 @@ public class CorpseUtil {
                     y++;
                 }
 
-            } else if (block.getType() == org.bukkit.Material.AIR) {
+            }
+
+            else if (block.getType() == org.bukkit.Material.AIR) {
                 y--;
-            } else if (block.getType() == org.bukkit.Material.SNOW) {
+            }
+
+            else if (block.getType() == org.bukkit.Material.SNOW) {
                 y -= 0.8;
                 break;
-            } else if (block.getBlockData() instanceof TrapDoor) {
+            }
+
+            else if (block.getBlockData() instanceof TrapDoor) {
                 y -= 0.7;
                 break;
-            } else if (block.getBlockData() instanceof Slab) {
+            }
+
+            else if (block.getBlockData() instanceof Slab) {
                 Slab slab = (Slab) block.getBlockData();
                 Slab.Type type = slab.getType();
                 if (type == Slab.Type.BOTTOM) {
                     y -= 0.4;
                     break;
                 }
-            } else {
+            }
+
+            else {
                 break;
             }
 
