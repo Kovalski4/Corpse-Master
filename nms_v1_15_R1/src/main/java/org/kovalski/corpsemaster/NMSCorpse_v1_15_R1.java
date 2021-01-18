@@ -59,7 +59,7 @@ public class NMSCorpse_v1_15_R1 implements ICorpse {
         this.corpse = null;
         this.corpse = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld));
         setMetadata();
-        this.corpse.setPositionRotation(owner.getLocation().getX(), owner.getLocation().getY(), owner.getLocation().getZ(), owner.getLocation().getYaw(), owner.getEyeLocation().getPitch());
+        setLocation();
         this.movePacket = new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(corpse.getId(), (short) 0,(short)2,(short)0,(byte)0,(byte)0, true);
         this.playerInfoAdd = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, corpse);
         this.namedEntitySpawn = new PacketPlayOutNamedEntitySpawn(corpse);
@@ -160,6 +160,23 @@ public class NMSCorpse_v1_15_R1 implements ICorpse {
         armorContents.add(pair2);
         armorContents.add(pair3);
         armorContents.add(pair4);
+    }
+
+    public void setLocation(){
+
+        Location location = new CorpseUtil().getFixedLocation(owner.getLocation());
+        double x = location.getX();
+        double y = location.getY();
+        double z = location.getZ();
+        float yaw = location.getYaw();
+        float pitch = location.getPitch();
+
+        this.corpse.setPositionRotation(
+                x
+                , y
+                , z
+                , yaw
+                , pitch);
     }
 
     static IBlockAccess fakeBed(EnumDirection direction){
